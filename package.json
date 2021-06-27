@@ -1,0 +1,22 @@
+{
+    "name": "teams-clone",
+    "version": "0.0.1",
+    "description": "Microsoft Teams Clone implementation for MS Engagae 2021 Programme",
+    "main": "src/server.js",
+    "dependencies": {
+        "express": "^4.17.1",
+        "socket.io": "^2.4.0"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.6"
+    },
+    "scripts": {
+        "watch": "nodemon --watch \"src/\" --exec \"node src/server.js\"",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Ankita13-code/MS-Engage-Teams-Clone.git"
+    }
+
+}

@@ -1,0 +1,72 @@
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    min-width: 100%;
+    min-height: 100%;
+    background-color: #202124;
+}
+
+.local-video {
+    position: absolute;
+    width: 12vw;
+    height: 13vh;
+    left: 1%;
+    top: 1%;
+    background: #3C4043;
+    border-radius: 4px;
+    float: left;
+}
+
+header {
+    width: 100vw;
+    height: 16vh;
+}
+
+.btn-ele {
+    position: relative;
+    /*background-size: 100%;*/
+    background-size: auto;
+    height: 56px;
+    width: 56px;
+    border: none;
+}
+
+.btn-video {
+    background: url(../images/video_on.svg);
+}
+
+.btn-mic {
+    background: url(../images/mic_on.svg);
+}
+
+.btn-share-screen {
+    background: url(../images/share_screen_off.svg);
+}
+
+.btn-record {
+    background: url(../images/record_off.svg);
+}
+
+.btn-chat {
+    background: url(../images/chat_off.svg);
+}
+
+.btn-participants {
+    background: url(../images/partcipants.svg);
+}
+
+.btn-info {
+    background: url(../images/info.svg);
+}
+
+.btn-end-call {
+    position: relative;
+    background: url(../images/end_call.svg);
+    width: 116px;
+    height: 56px;
+    border: none;
+    background-size: auto;
+}
