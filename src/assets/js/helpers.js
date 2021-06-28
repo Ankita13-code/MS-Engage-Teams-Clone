@@ -105,10 +105,10 @@ export default {
         return {
             iceServers: [{
                 urls: ["stun:eu-turn4.xirsys.com",
-                    "stun:stun.l.google.com:19302",
+                    /*"stun:stun.l.google.com:19302",
                     "stun:stun1.l.google.com:19302",
                     "stun:stun2.l.google.com:19302",
-                    "stun:stun3.l.google.com:19302"
+                    "stun:stun3.l.google.com:19302"*/
                 ]
             }, ]
         };
@@ -180,12 +180,12 @@ export default {
 
         if (share) {
             shareIconElem.setAttribute('title', 'Stop sharing screen');
-            shareIconElem.children[0].classList.add('text-primary');
-            shareIconElem.children[0].classList.remove('text-white');
+            shareIconElem.classList.add('btn-share-screen-on');
+            shareIconElem.classList.remove('btn-share-screen');
         } else {
             shareIconElem.setAttribute('title', 'Share screen');
-            shareIconElem.children[0].classList.add('text-white');
-            shareIconElem.children[0].classList.remove('text-primary');
+            shareIconElem.classList.add('btn-share-screen');
+            shareIconElem.classList.remove('btn-share-screen-on');
         }
     },
 

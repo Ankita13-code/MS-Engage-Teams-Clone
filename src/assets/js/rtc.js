@@ -61,6 +61,7 @@ window.addEventListener('load', () => {
 
             socket.on('sdp', async(data) => {
                 if (data.description.type === 'offer') {
+                    console.log(data.description);
                     data.description ? await pc[data.sender].setRemoteDescription(new RTCSessionDescription(data.description)) : '';
 
                     h.getUserFullMedia().then(async(stream) => {
@@ -84,6 +85,7 @@ window.addEventListener('load', () => {
                         console.error(e);
                     });
                 } else if (data.description.type === 'answer') {
+                    console.log(data.description);
                     await pc[data.sender].setRemoteDescription(new RTCSessionDescription(data.description));
                 }
             });
@@ -153,12 +155,20 @@ window.addEventListener('load', () => {
 
             //create offer
             if (createOffer) {
+                let negotiating = false;
                 pc[partnerName].onnegotiationneeded = async() => {
-                    let offer = await pc[partnerName].createOffer();
+                    try {
+                        if (negotiating || pc[partnerName].signalingState != "stable") return;
+                        negotiating = true;
+                        let offer = await pc[partnerName].createOffer();
 
-                    await pc[partnerName].setLocalDescription(offer);
+                        await pc[partnerName].setLocalDescription(offer);
 
-                    socket.emit('sdp', { description: pc[partnerName].localDescription, to: partnerName, sender: socketId });
+                        socket.emit('sdp', { description: pc[partnerName].localDescription, to: partnerName, sender: socketId });
+                    } finally {
+                        negotiating = false;
+                    }
+
                 };
             }
 
@@ -296,12 +306,12 @@ window.addEventListener('load', () => {
 
             if (isRecording) {
                 e.setAttribute('title', 'Stop recording');
-                e.children[0].classList.add('text-danger');
-                e.children[0].classList.remove('text-white');
+                e.classList.add('btn-recording');
+                e.classList.remove('btn-record');
             } else {
                 e.setAttribute('title', 'Record');
-                e.children[0].classList.add('text-white');
-                e.children[0].classList.remove('text-danger');
+                e.classList.add('btn-record');
+                e.classList.remove('btn-recording');
             }
         }
 
@@ -355,14 +365,14 @@ window.addEventListener('load', () => {
             let elem = document.getElementById('toggle-video');
 
             if (myStream.getVideoTracks()[0].enabled) {
-                e.target.classList.remove('fa-video');
-                e.target.classList.add('fa-video-slash');
+                e.target.classList.remove('btn-video');
+                e.target.classList.add('btn-video-off');
                 elem.setAttribute('title', 'Show Video');
 
                 myStream.getVideoTracks()[0].enabled = false;
             } else {
-                e.target.classList.remove('fa-video-slash');
-                e.target.classList.add('fa-video');
+                e.target.classList.remove('btn-video-off');
+                e.target.classList.add('btn-video');
                 elem.setAttribute('title', 'Hide Video');
 
                 myStream.getVideoTracks()[0].enabled = true;
@@ -379,14 +389,14 @@ window.addEventListener('load', () => {
             let elem = document.getElementById('toggle-mute');
 
             if (myStream.getAudioTracks()[0].enabled) {
-                e.target.classList.remove('fa-microphone-alt');
-                e.target.classList.add('fa-microphone-alt-slash');
+                e.target.classList.remove('btn-mic');
+                e.target.classList.add('btn-mute');
                 elem.setAttribute('title', 'Unmute');
 
                 myStream.getAudioTracks()[0].enabled = false;
             } else {
-                e.target.classList.remove('fa-microphone-alt-slash');
-                e.target.classList.add('fa-microphone-alt');
+                e.target.classList.remove('btn-mute');
+                e.target.classList.add('btn-mic');
                 elem.setAttribute('title', 'Mute');
 
                 myStream.getAudioTracks()[0].enabled = true;

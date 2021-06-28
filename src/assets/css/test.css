@@ -12,12 +12,11 @@ body {
 .local-video {
     position: absolute;
     width: 12vw;
-    height: 13vh;
-    left: 1%;
-    top: 1%;
+    height: auto;
     background: #3C4043;
     border-radius: 4px;
     float: left;
+    margin: 1.5vh 1.8vw;
 }
 
 header {
@@ -32,34 +31,63 @@ header {
     height: 56px;
     width: 56px;
     border: none;
+    margin: 6.1vh 0.8vw;
 }
 
 .btn-video {
     background: url(../images/video_on.svg);
 }
 
+.btn-video-off {
+    background: url(../images/video_off.svg);
+}
+
 .btn-mic {
     background: url(../images/mic_on.svg);
+}
+
+.btn-mute {
+    background: url(../images/mic-off.svg);
 }
 
 .btn-share-screen {
     background: url(../images/share_screen_off.svg);
 }
 
+.btn-share-screen-on {
+    background: url(../images/share-screen-on.svg);
+}
+
 .btn-record {
     background: url(../images/record_off.svg);
+}
+
+.btn-recording {
+    background: url(../images/record-on.svg);
 }
 
 .btn-chat {
     background: url(../images/chat_off.svg);
 }
 
+.btn-chat-on {
+    background: url(../images/chat_on.svg);
+}
+
 .btn-participants {
     background: url(../images/partcipants.svg);
 }
 
-.btn-info {
+.btn-participants-on {
+    background: url(../images/participants-on.svg);
+}
+
+.btn-meet-info {
     background: url(../images/info.svg);
+}
+
+.btn-meet-info-on {
+    background: url(../images/info-on.svg);
 }
 
 .btn-end-call {
@@ -69,4 +97,33 @@ header {
     height: 56px;
     border: none;
     background-size: auto;
+    margin: 6.1vh 0vh 1.5vw 5vw;
+}
+
+.main-videos {
+    height: 77.7vh;
+    width: 81.6vw;
+    margin: 6.1vh 9.2vw 3.7vh 9.2vw;
+}
+
+.remote-video-controls {
+    position: absolute;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 300000;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    visibility: hidden;
+}
+
+.remote-video:hover+.remote-video-controls,
+.remote-video-controls:hover {
+    visibility: visible;
+}
+
+.remote-video {
+    width: 100%;
+    height: auto;
+    max-height: 90vh;
 }

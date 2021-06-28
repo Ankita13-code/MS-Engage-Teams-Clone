@@ -25,6 +25,24 @@
 <body>
 
 
+    <div class="custom-modal" id='recording-options-modal'>
+        <div class="custom-modal-content">
+            <div class="row text-center">
+                <div class="col-md-6 mb-2">
+                    <span class="record-option" id='record-video'>Record video</span>
+                </div>
+                <div class="col-md-6 mb-2">
+                    <span class="record-option" id='record-screen'>Record screen</span>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-12 text-center">
+                    <button class="btn btn-outline-danger" id='closeModal'>Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <div class="container-fluid-box" id='room-create' hidden>
@@ -79,44 +97,30 @@
     </div>
 
     <div class="container-fluid room-comm" hidden>
-        <header class="row" style="width:100%; height:25vh">
-            <div class="col">
+        <header class="row">
+            <div class="col-2">
                 <video class="local-video mirror-mode" id='local' volume='0' autoplay muted></video>
             </div>
 
-            <div class="d-print-none col">
+            <div class="d-print-none col-10">
 
                 <div class="room-comm" style="width:autofit; float:left" hidden>
 
-                    <button class="btn-ele btn-mic" id='toggle-mute' title="Mute">
+                    <button class="btn-ele btn-mic" id='toggle-mute' title="Mute"></button>
+                    <button class="btn-ele btn-video" id='toggle-video' title="Hide Video"></button>
+                    <button class="btn-ele btn-share-screen" id='share-screen' title="Share screen"></button>
 
-                    </button>
+                </div>
+                <div class="room-comm" style="width:autofit; float:right" hidden>
 
-                    <button class="btn-ele btn-video" id='toggle-video' title="Hide Video">
-
-                    </button>
-
-                    <button class="btn-ele btn-share-screen" id='share-screen' title="Share screen">
-
-                    </button>
-
-                    <button class="btn-ele btn-record" id='record' title="Record">
-
-                    </button>
-
+                    <button class="btn-ele btn-record" id='record' title="Record"></button>
                     <button class="btn-ele btn-chat" id='toggle-chat-pane' title="chat">
                         <span class="badge badge-danger very-small font-weight-lighter" id='new-chat-notification'
                             hidden>New</span>
                     </button>
 
-                    <button class="btn-ele btn-participants" id='participants' title="Show participants">
-
-                    </button>
-
-                    <button class="btn-ele btn-info" id='info' title="Info">
-
-                    </button>
-
+                    <button class="btn-ele btn-participants" id='participants' title="Show participants"></button>
+                    <button class="btn-ele btn-meet-info" id='info' title="Info"></button>
                     <a href="/" title="Leave">
                         <button class="btn-end-call btn-no-effect" title="Leave"></button>
                     </a>
@@ -124,12 +128,12 @@
                 </div>
         </header>
 
-        <div class="row" style="width:auto; height:75vh">
-            <div class=" main bg" id='main-section'>
-                <div class="row mt-2 mb-2 bg" id='videos'></div>
+        <div class="row main-videos">
+            <div class="col" id='main-section'>
+                <div class="row mt-2 mb-2" style="width:100%" id='videos'></div>
             </div>
 
-            <div class="col-md-3 chat-col d-print-none mb-2 bg-info" id='chat-pane' hidden>
+            <div class="col-md-3 chat-col d-print-none mb-2 bg-white" id='chat-pane' hidden>
                 <div class="row">
                     <div class="col-12 text-center h2 mb-3">CHAT</div>
                 </div>
