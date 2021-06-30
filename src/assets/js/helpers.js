@@ -105,8 +105,8 @@ export default {
         return {
             iceServers: [{
                 urls: ["stun:eu-turn4.xirsys.com",
-                    /*"stun:stun.l.google.com:19302",
-                    "stun:stun1.l.google.com:19302",
+                    "stun:stun.l.google.com:19302",
+                    /*"stun:stun1.l.google.com:19302",
                     "stun:stun2.l.google.com:19302",
                     "stun:stun3.l.google.com:19302"*/
                 ]
@@ -117,28 +117,27 @@ export default {
 
     addChat(data, senderType) {
         let chatMsgDiv = document.querySelector('#chat-messages');
-        let contentAlign = 'justify-content-end';
         let senderName = 'You';
-        let msgBg = 'bg-white';
+        let msgBg = 'local-bg';
 
         if (senderType === 'remote') {
-            contentAlign = 'justify-content-start';
+
             senderName = data.sender;
-            msgBg = '';
+            msgBg = 'remote-bg';
 
             this.toggleChatNotificationBadge();
         }
 
         let infoDiv = document.createElement('div');
         infoDiv.className = 'sender-info';
-        infoDiv.innerHTML = `${ senderName } - ${ moment().format( 'Do MMMM, YYYY h:mm a' ) }`;
+        infoDiv.innerHTML = `${ senderName }`;
 
         let colDiv = document.createElement('div');
-        colDiv.className = `col-10 card chat-card msg ${ msgBg }`;
+        colDiv.className = `col-12 card chat-card ${ msgBg } msg ml-2 mt-1 mb-1`;
         colDiv.innerHTML = xssFilters.inHTMLData(data.msg).autoLink({ target: "_blank", rel: "nofollow" });
 
         let rowDiv = document.createElement('div');
-        rowDiv.className = `row ${ contentAlign } mb-2`;
+        rowDiv.className = `row msg-row mb-1`;
 
 
         colDiv.appendChild(infoDiv);
@@ -158,7 +157,7 @@ export default {
 
 
     toggleChatNotificationBadge() {
-        if (document.querySelector('#chat-pane').classList.contains('chat-opened')) {
+        if (document.querySelector('#chat-pane').classList.contains('box-opened')) {
             document.querySelector('#new-chat-notification').setAttribute('hidden', true);
         } else {
             document.querySelector('#new-chat-notification').removeAttribute('hidden');
@@ -192,6 +191,18 @@ export default {
 
     toggleVideoBtnDisabled(disabled) {
         document.getElementById('toggle-video').disabled = disabled;
+    },
+
+    copyToClipboard() {
+        var dummyInput = document.createElement('input');
+        let text = decodeURI(window.location.href);
+
+        document.body.appendChild(dummyInput);
+        dummyInput.value = text;
+        dummyInput.select();
+        document.execCommand('copy');
+        console.log('copied url');
+        document.body.removeChild(dummyInput);
     },
 
 
@@ -249,13 +260,15 @@ export default {
     adjustVideoElemSize() {
         let elem = document.getElementsByClassName('card');
         let totalRemoteVideosDesktop = elem.length;
-        let newWidth = totalRemoteVideosDesktop <= 2 ? '50%' : (
-            totalRemoteVideosDesktop == 3 ? '33.33%' : (
-                totalRemoteVideosDesktop <= 8 ? '25%' : (
-                    totalRemoteVideosDesktop <= 15 ? '20%' : (
-                        totalRemoteVideosDesktop <= 18 ? '16%' : (
-                            totalRemoteVideosDesktop <= 23 ? '15%' : (
-                                totalRemoteVideosDesktop <= 32 ? '12%' : '10%'
+        let newWidth = totalRemoteVideosDesktop <= 1 ? '100%' : (
+            totalRemoteVideosDesktop == 2 ? '50%' : (
+                totalRemoteVideosDesktop == 3 ? '33.33%' : (
+                    totalRemoteVideosDesktop <= 8 ? '25%' : (
+                        totalRemoteVideosDesktop <= 15 ? '20%' : (
+                            totalRemoteVideosDesktop <= 18 ? '16%' : (
+                                totalRemoteVideosDesktop <= 23 ? '15%' : (
+                                    totalRemoteVideosDesktop <= 32 ? '12%' : '10%'
+                                )
                             )
                         )
                     )
@@ -278,7 +291,7 @@ export default {
             newVid.id = `demo-${ i }-video`;
             newVid.srcObject = str;
             newVid.autoplay = true;
-            newVid.className = 'remote-video';
+            newVid.className = 'remote-video mb-1 ml-1 mr-1 mt-1';
 
             //video controls elements
             let controlDiv = document.createElement('div');
@@ -288,10 +301,11 @@ export default {
 
             //create a new div for card
             let cardDiv = document.createElement('div');
-            cardDiv.className = 'card card-sm';
+            cardDiv.className = 'card card-sm ';
             cardDiv.id = `demo-${ i }`;
+            newVid.appendChild(controlDiv);
             cardDiv.appendChild(newVid);
-            cardDiv.appendChild(controlDiv);
+
 
             //put div in main-section elem
             document.getElementById('videos').appendChild(cardDiv);

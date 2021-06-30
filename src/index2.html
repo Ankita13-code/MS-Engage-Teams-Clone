@@ -9,12 +9,14 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel='stylesheet' href='assets/css/test.css' type="text/css">
     <link rel='stylesheet' href='assets/css/app.css' type="text/css">
 
     <script src='/socket.io/socket.io.js'></script>
     <script type="module" src='assets/js/rtc.js'></script>
     <script type="module" src='assets/js/events.js'></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/7.3.0/adapter.min.js" integrity="sha256-2qQheewaqnZlXJ3RJRghVUwD/3fD9HNqxh4C+zvgmF4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js'></script>
@@ -106,46 +108,81 @@
 
                 <div class="room-comm" style="width:autofit; float:left" hidden>
 
-                    <button class="btn-ele btn-mic" id='toggle-mute' title="Mute"></button>
-                    <button class="btn-ele btn-video" id='toggle-video' title="Hide Video"></button>
-                    <button class="btn-ele btn-share-screen" id='share-screen' title="Share screen"></button>
+                    <button class="btn-ele btn-mic mybtn" id='toggle-mute' title="Mute"></button>
+                    <button class="btn-ele btn-video mybtn" id='toggle-video' title="Hide Video"></button>
+                    <button class="btn-ele btn-share-screen mybtn" id='share-screen' title="Share screen"></button>
 
                 </div>
                 <div class="room-comm" style="width:autofit; float:right" hidden>
 
-                    <button class="btn-ele btn-record" id='record' title="Record"></button>
-                    <button class="btn-ele btn-chat" id='toggle-chat-pane' title="chat">
+                    <button class="btn-ele btn-record mybtn" id='record' title="Record"></button>
+                    <button class="btn-ele btn-chat mybtn" id='toggle-chat-pane' title="chat">
                         <span class="badge badge-danger very-small font-weight-lighter" id='new-chat-notification'
                             hidden>New</span>
                     </button>
 
-                    <button class="btn-ele btn-participants" id='participants' title="Show participants"></button>
-                    <button class="btn-ele btn-meet-info" id='info' title="Info"></button>
+                    <button class="btn-ele btn-participants mybtn" id='toggle-participants' title="Show participants"></button>
+                    <button class="btn-ele btn-meet-info mybtn" id='toggle-info' title="Meeting Info"></button>
                     <a href="/" title="Leave">
-                        <button class="btn-end-call btn-no-effect" title="Leave"></button>
+                        <button class="btn-end-call btn-no-effect mybtn" title="Leave"></button>
                     </a>
 
                 </div>
         </header>
 
         <div class="row main-videos">
-            <div class="col" id='main-section'>
-                <div class="row mt-2 mb-2" style="width:100%" id='videos'></div>
-            </div>
+            <div class="col-md-12" id='main-section'>
+                <div class="row mt-2 mb-2 ml-1 mr-1" style="width:100%" id='videos'>
 
-            <div class="col-md-3 chat-col d-print-none mb-2 bg-white" id='chat-pane' hidden>
-                <div class="row">
-                    <div class="col-12 text-center h2 mb-3">CHAT</div>
-                </div>
-
-                <div id='chat-messages'></div>
-
-                <div class="row">
-                    <textarea id='chat-input' class="form-control rounded-0 chat-box border-info" rows='3' placeholder="Type here..."></textarea>
                 </div>
             </div>
+
+
+            <div class="box-col col-3 d-print-none mb-2" id='chat-pane' hidden>
+                <div class="row">
+                    <div class="h1 col-12">Chat</div>
+                </div>
+
+
+
+                <div class="chat-row container-fluid col-12">
+                    <div id='chat-messages'></div>
+                </div>
+
+                <div class="row" style="height: 6vh; margin-top: 2vh">
+                    <textarea id='chat-input' class="form-control chat-box" rows="1" placeholder="Type your message here"></textarea>
+                </div>
+            </div>
+
+            <div class="box-col col-3 d-print-none" style="height: 15em; width: 20vw; top: 16vh" id="info-pane" hidden>
+                <div class="row">
+                    <div class="h4 col-12 mb-4 mt-3 ml-2" style="font-weight: 900;">Meeting info</div>
+                </div>
+
+                <div class="row">
+                    <span class="sender-info col-12 ml-2 mt-2">Meeting Link</span>
+                </div>
+
+                <div class="row">
+                    <span class="col-12 mt-4 ml-2 mb-4 link-text" style="width: fit-content;" id="meet-link"></span>
+                </div>
+                <div>
+                    <button class="copy-info-btn mt-2" id="copy-meet-info">
+                            <i class="material-icons">
+                                content_copy
+                            </i>
+                             <span>Copy joining info</span>
+                        </button>
+                </div>
+
+            </div>
+
+
         </div>
+
+
         </div>
+    </div>
 
 </body>
 
