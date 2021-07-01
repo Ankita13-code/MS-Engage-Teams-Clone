@@ -443,7 +443,9 @@ window.addEventListener('load', () => {
             } else {
                 h.shareScreen().then((screenStream) => {
                     startRecording(screenStream);
-                }).catch(() => {});
+                }).catch((e) => {
+                    console.log(e);
+                });
             }
         });
 
@@ -457,7 +459,9 @@ window.addEventListener('load', () => {
             } else {
                 h.getUserFullMedia().then((videoStream) => {
                     startRecording(videoStream);
-                }).catch(() => {});
+                }).catch((e) => {
+                    console.log(e);
+                });
             }
         });
     }

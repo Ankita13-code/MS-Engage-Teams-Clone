@@ -26,7 +26,7 @@
 
 <body>
 
-
+    <!--
     <div class="custom-modal" id='recording-options-modal'>
         <div class="custom-modal-content">
             <div class="row text-center">
@@ -45,6 +45,10 @@
             </div>
         </div>
     </div>
+    -->
+
+
+
 
 
     <div class="container-fluid-box" id='room-create' hidden>
@@ -137,6 +141,28 @@
                 </div>
             </div>
 
+            <div class="box-col col-3 d-print-none" style="height: 15em; width: 20vw; top: 16vh;" id="recording-options-modal" hidden>
+                <div class="row">
+                    <div class="h4 col-12 mb-4 mt-3 ml-2" style="font-weight: 900;">Recording Options</div>
+                </div>
+
+                <div class="row text-center">
+                    <div class="col mb-2">
+                        <span class="record-option" id='record-video'>Record video</span>
+                    </div>
+                    <div class="col mb-2">
+                        <span class="record-option" id='record-screen'>Record screen</span>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-12 text-center">
+                        <button class="btn btn-outline-danger" id='closeModal'>Close</button>
+                    </div>
+                </div>
+
+            </div>
+
 
             <div class="box-col col-3 d-print-none mb-2" id='chat-pane' hidden>
                 <div class="row">
@@ -167,14 +193,24 @@
                     <span class="col-12 mt-4 ml-2 mb-4 link-text" style="width: fit-content;" id="meet-link"></span>
                 </div>
                 <div>
-                    <button class="copy-info-btn mt-2" id="copy-meet-info">
-                            <i class="material-icons">
-                                content_copy
-                            </i>
-                             <span>Copy joining info</span>
-                        </button>
+                    <button class="copy-info-btn mt-2 mybtn" id="copy-meet-info">
+                        <i class="material-icons"> content_copy </i>
+                        <span>Copy joining info</span>
+                    </button>
                 </div>
 
+            </div>
+
+            <div class="box-col col-3 d-print-none" id="participants-pane" hidden>
+                <div class="row">
+                    <div class="h4 col-12 mb-4 mt-3 ml-2" style="font-weight: 900;">Participants</div>
+                </div>
+
+                <div class="row">
+                    <div class="container-fluid col-12">
+                        <div id='participants'></div>
+                    </div>
+                </div>
             </div>
 
 

@@ -8,6 +8,7 @@
         "socket.io": "^2.4.0"
     },
     "devDependencies": {
+        "@types/socket.io": "^3.0.2",
         "nodemon": "^2.0.6"
     },
     "scripts": {
@@ -18,5 +19,4 @@
         "type": "git",
         "url": "https://github.com/Ankita13-code/MS-Engage-Teams-Clone.git"
     }
-
 }
