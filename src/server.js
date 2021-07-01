@@ -5,6 +5,8 @@ let io = require('socket.io')(server);
 let stream = require('./ws/stream');
 let path = require('path');
 
+const port = process.env.PORT || 3030;
+
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 app.get('/', (req, res) => {
@@ -14,4 +16,4 @@ app.get('/', (req, res) => {
 
 io.of('/stream').on('connection', stream);
 
-server.listen(3030);
+server.listen(port);
