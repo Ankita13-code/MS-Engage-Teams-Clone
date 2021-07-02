@@ -9,6 +9,8 @@ window.addEventListener('load', () => {
         document.querySelector('#room-create').attributes.removeNamedItem('hidden');
     } else if (!username) {
         document.querySelector('#username-set').attributes.removeNamedItem('hidden');
+        let headingDiv = document.getElementById('room-heading');
+        headingDiv.innerHTML = `Join room: ${room}`;
     } else {
         let commElem = document.getElementsByClassName('room-comm');
 
@@ -42,6 +44,7 @@ window.addEventListener('load', () => {
 
 
             socket.on('new user', (data) => {
+                console.log(data);
                 socket.emit('newUserStart', { to: data.socketId, sender: socketId });
                 pc.push(data.socketId);
                 init(true, data.socketId);
@@ -155,19 +158,20 @@ window.addEventListener('load', () => {
 
             //create offer
             if (createOffer) {
-                let negotiating = false;
-                pc[partnerName].onnegotiationneeded = async() => {
-                    try {
-                        if (negotiating || pc[partnerName].signalingState != "stable") return;
-                        negotiating = true;
-                        let offer = await pc[partnerName].createOffer();
 
-                        await pc[partnerName].setLocalDescription(offer);
+                pc[partnerName].onnegotiationneeded = async(e) => {
 
-                        socket.emit('sdp', { description: pc[partnerName].localDescription, to: partnerName, sender: socketId });
-                    } finally {
-                        negotiating = false;
-                    }
+
+
+                    let offer = await pc[partnerName].createOffer();
+
+                    await pc[partnerName].setLocalDescription(offer);
+
+                    socket.emit('sdp', {
+                        description: pc[partnerName].localDescription,
+                        to: partnerName,
+                        sender: socketId
+                    });
 
                 };
             }
@@ -197,8 +201,10 @@ window.addEventListener('load', () => {
                     //video controls elements
                     let controlDiv = document.createElement('div');
                     controlDiv.className = 'remote-video-controls';
-                    controlDiv.innerHTML = `<i class="fa fa-microphone text-white pr-3 mute-remote-mic" title="Mute"></i>
-                        <i class="fa fa-expand text-white expand-remote-video" title="Expand"></i>`;
+                    controlDiv.innerHTML = `<i class="fa fa-lg fa-microphone text-white pr-4 mute-remote-mic" title="Mute"></i>
+                        <i class="fa fa-expand fa-lg text-white expand-remote-video" title="Expand"></i>`;
+
+
 
                     //create a new div for card
                     let cardDiv = document.createElement('div');
@@ -221,10 +227,12 @@ window.addEventListener('load', () => {
                     case 'disconnected':
                     case 'failed':
                         h.closeVideo(partnerName);
+                        h.adjustVideoElemSize();
                         break;
 
                     case 'closed':
                         h.closeVideo(partnerName);
+                        h.adjustVideoElemSize()
                         break;
                 }
             };
@@ -236,6 +244,10 @@ window.addEventListener('load', () => {
                     case 'closed':
                         console.log("Signalling state is 'closed'");
                         h.closeVideo(partnerName);
+                        h.adjustVideoElemSize();
+                        break;
+                    case 'stable':
+                        console.log("ICE negotiation complete");
                         break;
                 }
             };

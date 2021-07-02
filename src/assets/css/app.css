@@ -1,5 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');*/
+
 html {
     height: 100%;
     width: 100%;
@@ -53,11 +54,12 @@ body {
 }
 
 .record-option {
-    height: 200px;
-    border-radius: 10%;
-    border: 1px solid #17a2b8;
+    border-radius: 16px;
+    border: none;
     cursor: pointer;
     padding: 10px;
+    background-color: #5F2EEA;
+    color: #FFFFFF;
     vertical-align: middle;
 }
 
@@ -65,46 +67,18 @@ body {
     display: none;
     position: fixed;
     z-index: 10000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
     overflow: auto;
+    align-self: center;
+    vertical-align: middle;
 }
 
-.custom-modal-content {
+
+/*.custom-modal-content {
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #17a2b8;
     width: 80%;
-}
-
-
-/*.form-control {
-    display: flex;
-    width: 416px;
-    height: 64px;
-    background: #EFF0F7;
-    border-radius: 16px;
-    border: none;
-    /* Text Placeholder - 16 px 
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 28px;
-    /* identical to box height, or 175% 
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.75px;
-    /* Grayscale / Placeholder 
-    color: #A0A3BD;
-    /* Inside Auto Layout 
-    flex: none;
-    order: 1;
-    flex-grow: 0;
-    margin: 0px 0px;
 }*/
 
 .btn-no-effect:focus {
@@ -112,8 +86,6 @@ body {
 }
 
 .btn-create {
-    position: relative;
-    display: flex;
     width: 416px;
     height: 64px;
     align-self: center;
@@ -123,27 +95,12 @@ body {
     /* Desktop / Link Small */
     font-family: Poppins;
     font-style: normal;
-    font-weight: 600;
     font-size: 16px;
     line-height: 28px;
     /* or 175% */
-    align-items: center;
     text-align: center;
     letter-spacing: 0.75px;
     color: #FFFFFF;
-}
-
-.container-fluid-box {
-    display: flexbox;
-    padding: 2%;
-    width: 44%;
-    height: 52%;
-    margin: 10% 28%;
-    align-items: center;
-    align-self: center;
-    background: #FFFFFF;
-    box-shadow: 0px 20px 24px rgba(17, 17, 17, 0.06);
-    border-radius: 12px;
 }
 
 @keyframes animatetop {

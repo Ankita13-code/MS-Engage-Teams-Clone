@@ -1,14 +1,64 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 html {
-    width: 100%;
     height: 100%;
-    font-size: 100%;
+    width: 100%;
 }
 
 body {
     min-width: 100%;
-    min-height: 100%;
+    min-height: 100vh;
     background-color: #202124;
+}
+
+.create-room-box {
+    min-height: 100vh;
+    width: 100%;
+    background-color: white;
+    overflow-x: hidden;
+}
+
+.page-heading {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 3em;
+    line-height: normal;
+    color: #242424;
+    margin-top: 20vh;
+    letter-spacing: 0.03em;
+}
+
+label {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1em;
+    line-height: 1.7em;
+    /* identical to box height, or 175% */
+    letter-spacing: 0.75px;
+    color: #242424;
+}
+
+.form-control {
+    min-width: 21.6vw;
+    min-height: 5.7vh;
+    background: #EFF0F7;
+    border-radius: 1em;
+    border: none;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 0.8em;
+    letter-spacing: 0.75px;
+    color: #A0A3BD;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 2%;
 }
 
 .local-video {
@@ -96,7 +146,7 @@ header {
 .btn-end-call {
     position: relative;
     background: url(../images/end_call.svg);
-    width: 116px;
+    width: 117px;
     height: 56px;
     border: none;
     background-size: auto;
@@ -112,16 +162,10 @@ header {
 .remote-video-controls {
     position: absolute;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
     z-index: 300000;
     padding: 10px;
     width: 100%;
     text-align: center;
-    visibility: hidden;
-}
-
-.remote-video:hover+.remote-video-controls,
-.remote-video-controls:hover {
     visibility: visible;
 }
 
@@ -129,7 +173,7 @@ header {
     min-width: 100%;
     height: auto;
     max-height: 74vh;
-    background-color: #3C4043;
+    background-color: #202124;
 }
 
 .mirror-mode {
@@ -161,7 +205,7 @@ header {
         max-width: 100%;
         border-radius: 7px;
         border: none;
-        background-color: #3C4043;
+        background-color: #202124;
     }
     .local-video {
         width: 50vw;
@@ -175,6 +219,7 @@ header {
         z-index: 1000;
         border: none;
         border-radius: 7px;
+        background-color: #202124;
     }
 }
 
@@ -195,8 +240,8 @@ header {
 .chat-box::placeholder {
     font-family: Roboto;
     font-style: normal;
-    font-weight: bold;
-    font-size: 0.8em;
+    font-weight: 500;
+    font-size: 1.3em;
     letter-spacing: 1px;
     color: #A0A3BD;
 }
@@ -246,7 +291,7 @@ header {
     position: absolute;
     font-family: Roboto;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 500;
     font-size: 2em;
     line-height: 39px;
     padding: 5px;
@@ -273,7 +318,7 @@ header {
 .msg {
     font-family: Roboto;
     font-style: normal;
-    font-weight: 1000;
+    font-weight: 500;
     font-size: 0.8em;
     color: #242424;
     letter-spacing: 1.03px;
@@ -288,7 +333,7 @@ header {
 
 .sender-info {
     font-family: Roboto;
-    font-weight: 900;
+    font-weight: 500;
     font-size: 0.7em;
     /* identical to box height */
     align-items: center;
@@ -314,7 +359,7 @@ header {
     float: right;
     font-family: Roboto;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 500;
     font-size: 1em;
     top: 0em;
     /* identical to box height */
@@ -330,7 +375,7 @@ header {
 
 .link-text {
     font-family: Roboto;
-    font-weight: 1000;
+    font-weight: 500;
     font-size: 0.9em;
     line-height: 1.3em;
     display: flex;
@@ -338,3 +383,6 @@ header {
     letter-spacing: 1.03409px;
     color: #242424;
 }
+
+
+/* Recording */

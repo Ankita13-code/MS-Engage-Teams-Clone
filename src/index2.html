@@ -10,13 +10,15 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
     <link rel='stylesheet' href='assets/css/test.css' type="text/css">
     <link rel='stylesheet' href='assets/css/app.css' type="text/css">
 
     <script src='/socket.io/socket.io.js'></script>
     <script type="module" src='assets/js/rtc.js'></script>
     <script type="module" src='assets/js/events.js'></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/7.3.0/adapter.min.js" integrity="sha256-2qQheewaqnZlXJ3RJRghVUwD/3fD9HNqxh4C+zvgmF4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js'></script>
@@ -26,81 +28,119 @@
 
 <body>
 
-    <!--
-    <div class="custom-modal" id='recording-options-modal'>
-        <div class="custom-modal-content">
-            <div class="row text-center">
-                <div class="col-md-6 mb-2">
-                    <span class="record-option" id='record-video'>Record video</span>
-                </div>
-                <div class="col-md-6 mb-2">
-                    <span class="record-option" id='record-screen'>Record screen</span>
-                </div>
-            </div>
-
-            <div class="row mt-3">
-                <div class="col-md-12 text-center">
-                    <button class="btn btn-outline-danger" id='closeModal'>Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    -->
-
-
-
-
-
-    <div class="container-fluid-box" id='room-create' hidden>
+    <div class="box-col col-12 d-print-none" style="height: 15em; margin-top: 30vh; margin-left: 40vw; z-index: 40000000" id="recording-options-modal" hidden>
         <div class="row">
-            <div class="col-11 h1 mt-5 text-center">Create Room</div>
+            <div class="h2 col-12 mb-4 mt-3 ml-2">Recording Options</div>
         </div>
 
-        <div class="row mt-2">
-            <div class="col-11 text-center">
-                <span class="form-text small text-danger" id='err-msg'></span>
+        <div class="row mt-4 justify-content-center">
+            <div class="col-xs-6 col-xs-offset-3 pr-2">
+                <button class="record-option" id='record-video'>Record your own video</button>
             </div>
 
-            <div class="row col-md-4 offset-md-4 mb-3 text-center" style="text-align:center">
-                <label for="room-name">Enter a Room Name</label>
-                <input type="text" id='room-name' class="form-control" placeholder="Room Name">
-            </div>
 
-            <div class="row col-md-4 offset-md-4 mb-3 text-center">
-                <label for="your-name">Enter Your Name</label>
-                <input type="text" id='your-name' class="form-control" placeholder="Your Name">
+            <div class="col-xs-6 col-xs-offset-3">
+                <button class="record-option" id='record-screen'>Record entire screen</button>
             </div>
-
-            <div class="row col-md-4 offset-md-4 mb-3 text-center">
-                <button id='create-room' class="btn-create">Create New Meeting</button>
-            </div>
-
-            <div class="row col-md-4 offset-md-4 mb-3 " id='room-created'></div>
         </div>
 
+        <div class="row mt-4 justify-content-center">
+            <div class="col-md-12 text-center">
+                <button class="btn btn-outline-danger" id='closeModal'>Close</button>
+            </div>
+        </div>
 
     </div>
 
-    <div class="container-fluid" id='username-set' hidden>
-        <div class="row">
-            <div class="col-12 h4 mt-5 text-center">Your Name</div>
+
+    <div class="create-room-box col-12 " id='room-create' hidden>
+        <div class="row text-center">
+            <div class="page-heading col-12">Create A Meeting</div>
         </div>
 
-        <div class="row mt-2">
-            <div class="col-12 text-center">
-                <span class="form-text small text-danger" id='err-msg-username'></span>
-            </div>
+        <div class="row mt-4">
+            <span class="text-center form-text small text-danger col-12" id='err-msg'></span>
+        </div>
 
-            <div class="col-12 col-md-4 offset-md-4 mb-3">
-                <label for="username">Your Name</label>
-                <input type="text" id='username' class="form-control rounded-0" placeholder="Your Name">
-            </div>
-
-            <div class="col-12 col-md-4 offset-md-4 mb-3">
-                <button id='enter-room' class="btn btn-block rounded-0 btn-info">Enter Room</button>
+        <div class="row justify-content-center mt-4">
+            <div class="col-xs-6 col-xs-offset-3">
+                <div class="row"><label for="your-name">Enter Your Name</label></div>
+                <div class="row"><input type="text" id='your-name' class="form-control col-12" placeholder="Your Name"></div>
             </div>
         </div>
+
+        <div class="row justify-content-center mt-4">
+            <div class="col-xs-6 col-xs-offset-3">
+                <div class="row"><label for="room-name">Enter Room Name</label></div>
+                <div class="row"><input type="text" id='room-name' class="form-control col-12 " placeholder="Room Name"></div>
+            </div>
+        </div>
+
+        <div class="row mt-4 justify-content-center">
+            <div class="col-xs-6 col-xs-offset-3">
+                <button id='create-room' class="btn-create mybtn">Create New Meeting</button>
+            </div>
+
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12 mb-3 text-center" id='room-created'></div>
+        </div>
+
+        <div class="footer justify-content-center">
+
+            <span>Made with </span>
+            <i class="fa fa-heart ml-2 mr-2 mt-1" style="color: red;"></i>
+            <span> By Ankita</span>
+
+
+        </div>
+
     </div>
+
+
+
+
+    <div class="create-room-box" id='username-set' hidden>
+        <div class="row text-center">
+            <div class="page-heading col-12" id="room-heading"></div>
+        </div>
+
+        <div class="row mt-4">
+            <span class="text-center form-text small text-danger col-12" id='err-msg-username'></span>
+        </div>
+
+        <div class="row justify-content-center mt-4">
+            <div class="col-xs-6 col-xs-offset-3">
+                <div class="row"><label for="username">Enter Your Name</label></div>
+                <div class="row"><input type="text" id='username' class="form-control col-12 " placeholder="Your Name"></div>
+            </div>
+        </div>
+
+        <div class="row mt-4 justify-content-center">
+            <div class="col-xs-6 col-xs-offset-3">
+                <button id='enter-room' class="btn-create mybtn">Enter room</button>
+            </div>
+
+        </div>
+        <div class="col">
+
+        </div>
+
+        <div class="footer justify-content-center">
+
+            <span>Made with </span>
+            <i class="fa fa-heart ml-2 mr-2 mt-1" style="color: red;"></i>
+            <span> By Ankita Pareek</span>
+
+
+        </div>
+
+    </div>
+
+
+
+
 
     <div class="container-fluid room-comm" hidden>
         <header class="row">
@@ -117,6 +157,7 @@
                     <button class="btn-ele btn-share-screen mybtn" id='share-screen' title="Share screen"></button>
 
                 </div>
+
                 <div class="room-comm" style="width:autofit; float:right" hidden>
 
                     <button class="btn-ele btn-record mybtn" id='record' title="Record"></button>
@@ -125,13 +166,14 @@
                             hidden>New</span>
                     </button>
 
-                    <button class="btn-ele btn-participants mybtn" id='toggle-participants' title="Show participants"></button>
+                    <!--   <button class="btn-ele btn-participants mybtn" id='toggle-participants' title="Show participants"></button>-->
                     <button class="btn-ele btn-meet-info mybtn" id='toggle-info' title="Meeting Info"></button>
                     <a href="/" title="Leave">
                         <button class="btn-end-call btn-no-effect mybtn" title="Leave"></button>
                     </a>
 
                 </div>
+            </div>
         </header>
 
         <div class="row main-videos">
@@ -139,28 +181,6 @@
                 <div class="row mt-2 mb-2 ml-1 mr-1" style="width:100%" id='videos'>
 
                 </div>
-            </div>
-
-            <div class="box-col col-3 d-print-none" style="height: 15em; width: 20vw; top: 16vh;" id="recording-options-modal" hidden>
-                <div class="row">
-                    <div class="h4 col-12 mb-4 mt-3 ml-2" style="font-weight: 900;">Recording Options</div>
-                </div>
-
-                <div class="row text-center">
-                    <div class="col mb-2">
-                        <span class="record-option" id='record-video'>Record video</span>
-                    </div>
-                    <div class="col mb-2">
-                        <span class="record-option" id='record-screen'>Record screen</span>
-                    </div>
-                </div>
-
-                <div class="row mt-3">
-                    <div class="col-md-12 text-center">
-                        <button class="btn btn-outline-danger" id='closeModal'>Close</button>
-                    </div>
-                </div>
-
             </div>
 
 
@@ -182,7 +202,7 @@
 
             <div class="box-col col-3 d-print-none" style="height: 15em; width: 20vw; top: 16vh" id="info-pane" hidden>
                 <div class="row">
-                    <div class="h4 col-12 mb-4 mt-3 ml-2" style="font-weight: 900;">Meeting info</div>
+                    <div class="h4 col-12 mb-4 mt-3 ml-2">Meeting info</div>
                 </div>
 
                 <div class="row">
@@ -217,7 +237,7 @@
         </div>
 
 
-        </div>
+    </div>
     </div>
 
 </body>

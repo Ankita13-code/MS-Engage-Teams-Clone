@@ -193,6 +193,14 @@ export default {
         document.getElementById('toggle-video').disabled = disabled;
     },
 
+    toggleInfoBtnDisabled(disabled) {
+        document.getElementById('toggle-info').disabled = disabled;
+    },
+
+    toggleChatBtnDisabled(disabled) {
+        document.getElementById('toggle-chat-pane').disabled = disabled;
+    },
+
     copyToClipboard() {
         var dummyInput = document.createElement('input');
         let text = decodeURI(window.location.href);
@@ -239,11 +247,11 @@ export default {
         let el = document.getElementById(id);
 
         if (show) {
-            el.style.display = 'block';
-            el.removeAttribute('aria-hidden');
+            //el.style.display = 'block';
+            el.removeAttribute('hidden');
         } else {
-            el.style.display = 'none';
-            el.setAttribute('aria-hidden', true);
+            //el.style.display = 'none';
+            el.setAttribute('hidden', true);
         }
     },
 
@@ -258,7 +266,7 @@ export default {
 
 
     adjustVideoElemSize() {
-        let elem = document.getElementsByClassName('card');
+        let elem = document.getElementsByClassName('card-sm');
         let totalRemoteVideosDesktop = elem.length;
         let newWidth = totalRemoteVideosDesktop <= 1 ? '100%' : (
             totalRemoteVideosDesktop == 2 ? '50%' : (
@@ -283,40 +291,5 @@ export default {
     },
 
 
-    createDemoRemotes(str, total = 6) {
-        let i = 0;
 
-        let testInterval = setInterval(() => {
-            let newVid = document.createElement('video');
-            newVid.id = `demo-${ i }-video`;
-            newVid.srcObject = str;
-            newVid.autoplay = true;
-            newVid.className = 'remote-video mb-1 ml-1 mr-1 mt-1';
-
-            //video controls elements
-            let controlDiv = document.createElement('div');
-            controlDiv.className = 'remote-video-controls';
-            controlDiv.innerHTML = `<i class="fa fa-microphone text-white pr-3 mute-remote-mic" title="Mute"></i>
-                <i class="fa fa-expand text-white expand-remote-video" title="Expand"></i>`;
-
-            //create a new div for card
-            let cardDiv = document.createElement('div');
-            cardDiv.className = 'card card-sm ';
-            cardDiv.id = `demo-${ i }`;
-            newVid.appendChild(controlDiv);
-            cardDiv.appendChild(newVid);
-
-
-            //put div in main-section elem
-            document.getElementById('videos').appendChild(cardDiv);
-
-            this.adjustVideoElemSize();
-
-            i++;
-
-            if (i == total) {
-                clearInterval(testInterval);
-            }
-        }, 2000);
-    }
 };
