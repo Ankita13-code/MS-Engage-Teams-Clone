@@ -104,7 +104,7 @@ export default {
     getIceServer() {
         return {
             iceServers: [{
-                urls: ["stun:eu-turn4.xirsys.com",
+                urls: ["stun:3.7.35.255:443",
                     "stun:stun.l.google.com:19302",
                     /*"stun:stun1.l.google.com:19302",
                     "stun:stun2.l.google.com:19302",
@@ -112,6 +112,21 @@ export default {
                 ]
             }, ]
         };
+    },
+
+    addName(data, senderType) {
+        let cardDiv = document.getElementsByClassName('card-sm');
+        let nameDiv = document.createElement('div');
+        let senderName = 'You';
+
+        if (senderType === 'remote') {
+            senderName = data.sender;
+        }
+
+        nameDiv.innerHTML = `<span class='text-white'>${senderName}</span>`
+
+        cardDiv.appendChild(nameDiv);
+
     },
 
 
@@ -130,7 +145,7 @@ export default {
 
         let infoDiv = document.createElement('div');
         infoDiv.className = 'sender-info';
-        infoDiv.innerHTML = `${ senderName }`;
+        infoDiv.innerHTML = `${ senderName } - ${moment().format( 'h:mm a' ) }`;
 
         let colDiv = document.createElement('div');
         colDiv.className = `col-12 card chat-card ${ msgBg } msg ml-2 mt-1 mb-1`;

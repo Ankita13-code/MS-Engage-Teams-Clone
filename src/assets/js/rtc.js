@@ -44,7 +44,6 @@ window.addEventListener('load', () => {
 
 
             socket.on('new user', (data) => {
-                console.log(data);
                 socket.emit('newUserStart', { to: data.socketId, sender: socketId });
                 pc.push(data.socketId);
                 init(true, data.socketId);
@@ -64,7 +63,6 @@ window.addEventListener('load', () => {
 
             socket.on('sdp', async(data) => {
                 if (data.description.type === 'offer') {
-                    console.log(data.description);
                     data.description ? await pc[data.sender].setRemoteDescription(new RTCSessionDescription(data.description)) : '';
 
                     h.getUserFullMedia().then(async(stream) => {
@@ -88,7 +86,6 @@ window.addEventListener('load', () => {
                         console.error(e);
                     });
                 } else if (data.description.type === 'answer') {
-                    console.log(data.description);
                     await pc[data.sender].setRemoteDescription(new RTCSessionDescription(data.description));
                 }
             });
@@ -96,6 +93,13 @@ window.addEventListener('load', () => {
 
             socket.on('chat', (data) => {
                 h.addChat(data, 'remote');
+                //console.log(data.sender);
+            });
+
+            socket.on('track', (data) => {
+                sendName();
+                h.addName((data), 'remote');
+                console.log(data.sender);
             });
         });
 
@@ -124,6 +128,16 @@ window.addEventListener('load', () => {
 
             //add localchat
             h.addChat(data, 'local');
+        }
+
+        function sendName() {
+            let data = {
+                room: room,
+                sender: username
+            };
+
+            socket.emit('track', data);
+            h.addName(data, 'local');
         }
 
 
@@ -160,8 +174,6 @@ window.addEventListener('load', () => {
             if (createOffer) {
 
                 pc[partnerName].onnegotiationneeded = async(e) => {
-
-
 
                     let offer = await pc[partnerName].createOffer();
 
@@ -201,10 +213,8 @@ window.addEventListener('load', () => {
                     //video controls elements
                     let controlDiv = document.createElement('div');
                     controlDiv.className = 'remote-video-controls';
-                    controlDiv.innerHTML = `<i class="fa fa-lg fa-microphone text-white pr-4 mute-remote-mic" title="Mute"></i>
-                        <i class="fa fa-expand fa-lg text-white expand-remote-video" title="Expand"></i>`;
-
-
+                    controlDiv.innerHTML = `<i class=" fa fa-lg fa-microphone text-white ml-5 pl-5 pr-4 mute-remote-mic" title="Mute incoming audio"></i>
+                        <i class="fa fa-lg fa-expand text-white expand-remote-video" title="Full Screen Video"></i>`;
 
                     //create a new div for card
                     let cardDiv = document.createElement('div');
@@ -212,6 +222,7 @@ window.addEventListener('load', () => {
                     cardDiv.id = partnerName;
                     cardDiv.appendChild(newVid);
                     cardDiv.appendChild(controlDiv);
+
 
                     //put div in main-section elem
                     document.getElementById('videos').appendChild(cardDiv);
@@ -318,6 +329,7 @@ window.addEventListener('load', () => {
 
             if (isRecording) {
                 e.setAttribute('title', 'Stop recording');
+                // e.innerHTML = `${moment().format()}`
                 e.classList.add('btn-recording');
                 e.classList.remove('btn-record');
             } else {
@@ -330,7 +342,7 @@ window.addEventListener('load', () => {
 
         function startRecording(stream) {
             mediaRecorder = new MediaRecorder(stream, {
-                mimeType: 'video/webm;codecs=vp9'
+                mimeType: "video/webm;codecs=opus, vp8"
             });
 
             mediaRecorder.start(1000);
