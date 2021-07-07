@@ -3,7 +3,6 @@ import h from './helpers.js';
 window.addEventListener('load', () => {
     const room = h.getQString(location.href, 'room');
     const username = sessionStorage.getItem('username');
-    console.log(room, username);
 
     if (!room) {
         document.querySelector('#room-create').attributes.removeNamedItem('hidden');
@@ -93,7 +92,6 @@ window.addEventListener('load', () => {
 
             socket.on('chat', (data) => {
                 h.addChat(data, 'remote');
-                //console.log(data.sender);
             });
 
             socket.on('track', (data) => {

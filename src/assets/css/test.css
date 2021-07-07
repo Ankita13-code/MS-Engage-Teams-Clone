@@ -19,6 +19,12 @@ body {
     overflow-x: hidden;
 }
 
+img {
+    height: 134px;
+    width: 370px;
+    float: left;
+}
+
 .page-heading {
     font-family: Roboto;
     font-style: normal;
@@ -26,8 +32,8 @@ body {
     font-size: 3em;
     line-height: normal;
     color: #242424;
-    margin-top: 20vh;
     letter-spacing: 0.03em;
+    margin-top: 10vh;
 }
 
 label {
@@ -74,7 +80,6 @@ header {
 
 .btn-ele {
     position: relative;
-    /*background-size: 100%;*/
     background-size: auto;
     height: 56px;
     width: 56px;
@@ -420,10 +425,6 @@ header {
     overflow: auto;
     align-self: center;
     vertical-align: middle;
-}
-
-.btn-no-effect:focus {
-    box-shadow: none;
 }
 
 .btn-create {

@@ -13,7 +13,6 @@ const stream = (socket) => {
 
     socket.on('newUserStart', (data) => {
         socket.to(data.to).emit('newUserStart', { sender: data.sender });
-        console.log("new user entered");
     });
 
 

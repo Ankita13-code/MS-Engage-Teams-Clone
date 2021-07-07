@@ -104,13 +104,19 @@ export default {
     getIceServer() {
         return {
             iceServers: [{
-                urls: ["stun:3.7.35.255:443",
-                    "stun:stun.l.google.com:19302",
-                    /*"stun:stun1.l.google.com:19302",
-                    "stun:stun2.l.google.com:19302",
-                    "stun:stun3.l.google.com:19302"*/
-                ]
-            }, ]
+                    urls: ["stun:3.7.35.255:443",
+                        "stun:stun.l.google.com:19302",
+                    ]
+                },
+                {
+                    username: "ankitapareek2000@gmail.com",
+                    credential: "EWwTZNTstG7LR.q",
+                    urls: [
+                        "turn:numb.viagenie.ca"
+                    ]
+                }
+
+            ]
         };
     },
 
@@ -224,7 +230,6 @@ export default {
         dummyInput.value = text;
         dummyInput.select();
         document.execCommand('copy');
-        console.log('copied url');
         document.body.removeChild(dummyInput);
     },
 
@@ -262,10 +267,8 @@ export default {
         let el = document.getElementById(id);
 
         if (show) {
-            //el.style.display = 'block';
             el.removeAttribute('hidden');
         } else {
-            //el.style.display = 'none';
             el.setAttribute('hidden', true);
         }
     },

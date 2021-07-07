@@ -69,7 +69,6 @@ window.addEventListener('load', () => {
         let copyBtn = document.getElementById('copy-meet-info');
 
         if (document.querySelector('#info-pane').classList.contains('box-opened')) {
-            console.log('copied text')
             helpers.copyToClipboard();
             copyBtn.children[1].innerHTML = "Copied";
             copyBtn.style.color = "#27AE60";
@@ -95,7 +94,7 @@ window.addEventListener('load', () => {
     });
 
 
-    //When the 'Create room" is button is clicked
+    //When the 'Create room" button is clicked
     document.getElementById('create-room').addEventListener('click', (e) => {
         e.preventDefault();
 
