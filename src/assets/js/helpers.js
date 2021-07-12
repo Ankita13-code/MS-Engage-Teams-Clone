@@ -48,13 +48,13 @@ export default {
     },
 
 
-    userMediaAvailable() {
+    isUserMediaAvailable() {
         return !!(navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
     },
 
 
-    getUserFullMedia() {
-        if (this.userMediaAvailable()) {
+    getFullUserMedia() {
+        if (this.isUserMediaAvailable()) {
             return navigator.mediaDevices.getUserMedia({
                 video: true,
                 audio: {
@@ -69,7 +69,7 @@ export default {
 
 
     getUserAudio() {
-        if (this.userMediaAvailable()) {
+        if (this.isUserMediaAvailable()) {
             return navigator.mediaDevices.getUserMedia({
                 audio: {
                     echoCancellation: true,
@@ -84,7 +84,7 @@ export default {
 
 
     shareScreen() {
-        if (this.userMediaAvailable()) {
+        if (this.isUserMediaAvailable()) {
             return navigator.mediaDevices.getDisplayMedia({
                 video: {
                     cursor: "always"
@@ -264,19 +264,19 @@ export default {
 
 
     toggleModal(id, show) {
-        let el = document.getElementById(id);
+        let element = document.getElementById(id);
 
         if (show) {
-            el.removeAttribute('hidden');
+            element.removeAttribute('hidden');
         } else {
-            el.setAttribute('hidden', true);
+            element.setAttribute('hidden', true);
         }
     },
 
 
 
     setLocalStream(stream, mirrorMode = true) {
-        const localVidElem = document.getElementById('local');
+        let localVidElem = document.getElementById('local');
 
         localVidElem.srcObject = stream;
         mirrorMode ? localVidElem.classList.add('mirror-mode') : localVidElem.classList.remove('mirror-mode');
