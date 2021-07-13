@@ -28,7 +28,7 @@ VConnect is a multiparty Video Conferencing Web app built using Node.js, WebRTC,
 - Toggle audio stream (Mute and unmute)
 - Toggle video stream
 - Screen Sharing
-- Chat functionality
+- Chat functionality - (Emojis and autolinks support available)
 - Meeting info
 - Screen Recording 
 - Video Recording
@@ -37,7 +37,7 @@ VConnect is a multiparty Video Conferencing Web app built using Node.js, WebRTC,
 
 ## Prerequisites
  - node >=15.5.0
- - npm> =7.17.0
+ - npm >=7.17.0
 
 
 ## Installation
