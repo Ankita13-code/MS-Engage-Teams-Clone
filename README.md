@@ -16,7 +16,6 @@ VConnect is a multiparty Video Conferencing Web app built using Node.js, WebRTC,
 
 ![IMG](./src/assets/images/readme-ss1.jpg)
 
-  - The app can be tested here: https://v--connect.herokuapp.com/ 
   - Demo video: https://youtu.be/8EoVc2YffUs
   - Design Specs: https://tinyurl.com/Figma-Designs
 
